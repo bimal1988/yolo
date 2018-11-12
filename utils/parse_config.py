@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 def parse_model_config(path):
     """
     Parses yolo configuration file.
-    Returns a list of blocks. 
-    Each blocks describes a block in the neural network to be built. 
+    Returns a list of blocks.
+    Each blocks describes a block in the neural network to be built.
     Block is represented as a dictionary in the list.
     """
     module_defs = []

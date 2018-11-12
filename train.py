@@ -9,7 +9,7 @@ from models import Darknet
 
 cuda = torch.cuda.is_available()
 
-model_config_path = "config/yolov3.cfg"
+model_config_path = "config/yolov3-tiny.cfg"
 train_path = "data/test.txt"
 
 # Get hyperparameters
@@ -30,22 +30,25 @@ dataloader = DataLoader(YOLODataset(train_path), batch_size=1, shuffle=False)
 
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
-optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()))
-epochs = 100
+optimizer = torch.optim.Adam(
+    filter(lambda p: p.requires_grad, model.parameters()))
+epochs = 10
 for epoch in range(epochs):
     for minibatch, (_, imgs, targets) in enumerate(dataloader):
         imgs = Variable(imgs.type(Tensor))
         targets = Variable(targets.type(Tensor), requires_grad=False)
-        
+
         optimizer.zero_grad()
 
         loss = model(imgs, targets)
 
         loss.backward()
         optimizer.step()
-        
+
         print(
-            "[Epoch %d/%d, Batch %d/%d] [Losses: x %f, y %f, w %f, h %f, conf %f, cls %f, total %f, recall: %.5f, precision: %.5f]"
+            "[Epoch %d/%d, Batch %d/%d]"
+            "[Losses: x %f, y %f, w %f, h %f, conf %f, cls %f, total %f, "
+            "recall: %.5f, precision: %.5f]"
             % (
                 epoch,
                 epochs,

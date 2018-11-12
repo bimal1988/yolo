@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/Users/bimal/anaconda/bin/python",
+    "python.linting.pylintEnabled": false,
+    "cSpell.enabled": false,
+    "python.linting.flake8Enabled": true,
+}
