@@ -9,7 +9,7 @@ from models import Darknet
 
 cuda = torch.cuda.is_available()
 
-model_config_path = "config/yolov3-tiny.cfg"
+model_config_path = "config/yolov3.cfg"
 train_path = "data/test.txt"
 
 # Get hyperparameters
@@ -32,7 +32,7 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
 optimizer = torch.optim.Adam(
     filter(lambda p: p.requires_grad, model.parameters()))
-epochs = 10
+epochs = 30
 for epoch in range(epochs):
     for minibatch, (_, imgs, targets) in enumerate(dataloader):
         imgs = Variable(imgs.type(Tensor))
